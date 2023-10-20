@@ -1,0 +1,49 @@
+# docker-composeのバージョン
+version: "3"
+
+# コンテナ定義
+services:
+  # webサーバー
+  web:
+    # コンテナ名
+    container_name: "web"
+    # コンテナの作成に使用するDockerfileのパス
+    build:
+      dockerfile: "./container/web/Dockerfile"
+    # ホスト側のポート:コンテナ側のポートを指定
+    ports:
+      - "8080:80"
+    # src配下のファイルをコンテナ内の~/va/www/html配下に配置
+    volumes:
+      - "./src:/var/www/html"
+
+  # PHPサーバー
+  php:
+    # コンテナ名
+    container_name: "php"
+    # コンテナの作成に使用するDockerfileのパス
+    build:
+      dockerfile: "./container/php/Dockerfile"
+    # srcディレクトリ内のファイルをコンテナ内の~/var/www/html配下にマウント
+    volumes:
+      - "./src:/var/www/html"
+
+  # DBサーバー
+  db:
+    # コンテナ名
+    container_name: "db"
+    # コンテナの作成に使用するDockerfileのパス
+    build:
+      dockerfile: "./container/db/Dockerfile"
+    # ホスト側のポート:コンテナ側のポートを指定
+    ports:
+      - "3306:3306"
+    # 環境変数の指定
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    # srcディレクトリ内のファイルをコンテナ内の~/var/www/html配下にマウント
+    volumes:
+      - "./container/db/data:/var/lib/mysql"
