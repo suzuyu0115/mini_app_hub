@@ -55,5 +55,6 @@
 
 
 ## ■ER図
-<img width="773" alt="laravel_er" src="https://github.com/suzuyu0115/mini_app_hub/assets/113349377/54f6444b-abc1-4262-83b1-257dc7221250">
+<img width="773" alt="laravel_er" src="https://github.com/suzuyu0115/mini_app_hub/assets/113349377/56c1dd8b-144e-4520-9f4f-22759f2289b3">
+
 
