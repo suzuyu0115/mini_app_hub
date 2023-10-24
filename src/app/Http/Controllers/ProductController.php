@@ -28,12 +28,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $inputs = $request->validate([
+            'name' => 'required|max:255',
+            'url' => 'required|max:1000',
+            'code_url' => 'max:1000',
+            'content' => 'required|max:1000',
+            'image' => 'image | max:2048'
+        ]);
+
         $product = new Product();
-        $product->name = $request->input('name');
-        $product->url = $request->input('url');
-        $product->code_url = $request->input('code_url');
-        $product->content = $request->input('content');
-        $product->user_id = auth()->user()->id;
+            $product->name = $request->input('name');
+            $product->url = $request->input('url');
+            $product->code_url = $request->input('code_url');
+            $product->content = $request->input('content');
+            $product->user_id = auth()->user()->id;
         $product->save();
         return redirect()->route('product.create')->with('message', 'アプリを投稿しました');
     }
