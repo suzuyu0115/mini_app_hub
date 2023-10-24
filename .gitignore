@@ -1,2 +1,3 @@
 .env
 container/db/data/**
+.DS_Store
