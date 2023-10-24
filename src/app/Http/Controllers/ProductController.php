@@ -42,6 +42,12 @@ class ProductController extends Controller
             $product->code_url = $request->input('code_url');
             $product->content = $request->input('content');
             $product->user_id = auth()->user()->id;
+            if ($request->file('image')) {
+                $original = request()->file('image')->getClientOriginalName();
+                $name = date('YmdHis') . '_' . $original;
+                request()->file('image')->move('storage/images', $name);
+                $product->image = $name;
+            }
         $product->save();
         return redirect()->route('product.create')->with('message', 'アプリを投稿しました');
     }
