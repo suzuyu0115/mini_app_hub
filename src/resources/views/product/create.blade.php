@@ -3,9 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             アプリを投稿
         </h2>
-        @if (session('message'))
-            {{ session('message') }}
-        @endif
+        <x-message :message="session('message')" />
     </x-slot>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
