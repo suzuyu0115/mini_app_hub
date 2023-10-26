@@ -10,8 +10,7 @@
                                 @if (App::environment('local'))
                                     <img src="{{ asset('storage/images/' . $product->image) }}" alt="Description" class="product-image">
                                 @else
-                                    <img src="{{ Storage::disk('s3')->url($product->image) }}" alt="Description" class="product-image">
-                                    {{-- <img src="https://mini-app-hub.s3.ap-northeast-1.amazonaws.com/{{ $product->image }}" alt="Description" class="product-image"> --}}
+                                    <img src="{{ $product->image }}" alt="Description" class="product-image">
                                 @endif
                             @else
                                 <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">

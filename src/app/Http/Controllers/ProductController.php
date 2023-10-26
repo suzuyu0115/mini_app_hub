@@ -62,9 +62,8 @@ class ProductController extends Controller
                 $product->image = $name;
             } else {
                 // 本番環境
-                $image = $request->file('image');
-                $path = Storage::disk('s3')->putFile('/', $image);
-                $product->image = $path;
+                $path = Storage::disk('s3')->putFile('example', $image, 'public');
+                $product->image = Storage::disk('s3')->url($path);
             }
         }
 
