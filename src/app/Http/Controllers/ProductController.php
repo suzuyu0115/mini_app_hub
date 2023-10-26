@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProductController extends Controller
@@ -44,18 +46,16 @@ class ProductController extends Controller
         $product->content = $request->input('content');
         $product->user_id = auth()->user()->id;
 
-        if ($request->file('image')) {
-            $original = $request->file('image')->getClientOriginalName();
-            $name = date('YmdHis') . '_' . $original;
-
-            if (app()->environment('local')) {
-                // ローカル環境の場合の保存処理
-                $request->file('image')->move('storage/images', $name);
-                $product->image = $name;
+        if (request('image')){
+            if (app()->isLocal()) {
+                // ローカル環境
+                $time = date("Ymdhis");
+                $product->image = $request->image->storeAs('public/images', $time.'_'.Auth::user()->id. '.jpg');
             } else {
-                // 本番環境の場合のS3への保存処理
-                $path = Storage::disk('s3')->putFile('products', $request->file('image'), 'public');
-                $product->image = Storage::disk('s3')->url($path);
+                // 本番環境
+                $image = $request->file('image');
+                $path = Storage::disk('s3')->putFile('/', $image);
+                $product->image = $path;
             }
         }
 
