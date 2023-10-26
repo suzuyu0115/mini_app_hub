@@ -10,12 +10,19 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        // index アクションのみ認証を必要としないように設定
+        $this->middleware('auth')->except('index');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $products = Product::orderBy('created_at', 'desc')->get();
+        $user=auth()->user();
+        return view('product.index', compact('products', 'user'));
     }
 
     /**
@@ -49,18 +56,19 @@ class ProductController extends Controller
         if (request('image')){
             if (app()->isLocal()) {
                 // ローカル環境
-                $time = date("Ymdhis");
-                $product->image = $request->image->storeAs('public/images', $time.'_'.Auth::user()->id. '.jpg');
+                $original = request()->file('image')->getClientOriginalName();
+                $name = date('Ymd_His').'_'.$original;
+                request()->file('image')->move('storage/images', $name);
+                $product->image = $name;
             } else {
                 // 本番環境
-                $image = $request->file('image');
-                $path = Storage::disk('s3')->putFile('/', $image);
-                $product->image = $path;
+                $path = Storage::disk('s3')->putFile('example', $image, 'public');
+                $product->image = Storage::disk('s3')->url($path);
             }
         }
 
         $product->save();
-        return redirect()->route('product.create')->with('message', 'アプリを投稿しました');
+        return redirect()->route('product.index')->with('message', 'アプリを投稿しました');
     }
 
     /**
