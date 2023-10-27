@@ -8,17 +8,25 @@
                         <div class="image-container">
                             @if($product->image)
                                 @if (App::environment('local'))
-                                    <img src="{{ asset('storage/images/' . $product->image) }}" alt="Description" class="product-image">
+                                    <a href="{{ route('product.show', $product) }}">
+                                        <img src="{{ asset('storage/images/' . $product->image) }}" alt="Description" class="product-image">
+                                    </a>
                                 @else
-                                    <img src="{{ $product->image }}" alt="Description" class="product-image">
+                                    <a href="{{ route('product.show', $product) }}">
+                                        <img src="{{ $product->image }}" alt="Description" class="product-image">
+                                    </a>
                                 @endif
                             @else
-                                <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
+                                <a href="{{ route('product.show', $product) }}">
+                                    <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
+                                </a>
                             @endif
                         </div>
                     <div class="p-6">
                         <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $product->created_at->format('Y-m-d') }}</h2>
-                        <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $product->name }}</h1>
+                        <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
+                            <a href="{{ route('product.show', $product) }}">{{ $product->name }}</a>
+                        </h1>
                         <p class="leading-relaxed mb-3">{{ $product->content }}</p>
                         <div class="flex items-center flex-wrap ">
                         <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">アプリを見にいく

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* index */
 .image-container {
     position: relative;
     width: 100%;
