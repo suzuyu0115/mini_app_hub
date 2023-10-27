@@ -11,18 +11,12 @@
             <div class="image-container">
                 @if($product->image)
                     @if (App::environment('local'))
-                        <a href="{{ route('product.show', $product) }}">
-                            <img src="{{ asset('storage/images/' . $product->image) }}" alt="Description" class="product-image">
-                        </a>
+                        <img src="{{ asset('storage/images/' . $product->image) }}" alt="Description" class="product-image">
                     @else
-                        <a href="{{ route('product.show', $product) }}">
-                            <img src="{{ $product->image }}" alt="Description" class="product-image">
-                        </a>
+                        <img src="{{ $product->image }}" alt="Description" class="product-image">
                     @endif
                 @else
-                    <a href="{{ route('product.show', $product) }}">
-                        <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
-                    </a>
+                    <img src="https://dummyimage.com/720x400" alt="Description" class="product-image">
                 @endif
             </div>
         </div>
