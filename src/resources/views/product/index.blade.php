@@ -1,5 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
+        <form action="{{ route('product.index') }}" method="GET">
+            @csrf
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+            <div class="relative">
+                <input type="text" id="default-search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="アプリを検索" name="keyword">
+                <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2" value="検索">検索</button>
+            </div>
+        </form>
         <x-message :message="session('message')" />
     </x-slot>
 
