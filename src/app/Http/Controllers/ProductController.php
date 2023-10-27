@@ -53,16 +53,16 @@ class ProductController extends Controller
         $product->content = $request->input('content');
         $product->user_id = auth()->user()->id;
 
-        if (request('image')){
+        if ($request->has('image')) {
             if (app()->isLocal()) {
-                // ローカル環境
-                $original = request()->file('image')->getClientOriginalName();
+                // ローカル環境での処理
+                $original = $request->file('image')->getClientOriginalName();
                 $name = date('Ymd_His').'_'.$original;
-                request()->file('image')->move('storage/images', $name);
+                $request->file('image')->move(public_path('storage/images'), $name);
                 $product->image = $name;
             } else {
-                // 本番環境
-                $path = Storage::disk('s3')->putFile('example', $image, 'public');
+                // 本番環境での処理
+                $path = Storage::disk('s3')->putFile('/', $request->file('image'), 'public');
                 $product->image = Storage::disk('s3')->url($path);
             }
         }
