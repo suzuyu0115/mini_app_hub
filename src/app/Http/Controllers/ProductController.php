@@ -18,11 +18,18 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::orderBy('created_at', 'desc')->get();
-        $user=auth()->user();
-        return view('product.index', compact('products', 'user'));
+        $query = Product::orderBy('created_at', 'desc');
+
+        // 検索キーワードが存在する場合、クエリを追加
+        if ($request->keyword) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+
+        $products = $query->get();
+
+        return view('product.index', compact('products'));
     }
 
     /**
