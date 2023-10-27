@@ -19,6 +19,7 @@
                     <img src="https://dummyimage.com/720x400" alt="Description" class="product-image">
                 @endif
             </div>
+            <br>
         </div>
         <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
             <div class="flex flex-col mb-5 lg:items-start items-center">
@@ -46,6 +47,11 @@
                 <div class="flex-grow">
                     <a href="{{ $product->code_url }}" class="text-gray-900 text-lg title-font font-medium">{{ $product->code_url }}</a>
                 </div>
+            </div>
+            <div class="flex flex-col mb-5 lg:items-start items-center">
+                <a href="{{route('product.edit', $product)}}">
+                    <x-primary-button class="bg-teal-700 mr-5">編集</x-primary-button>
+                </a>
             </div>
         </div>
     </div>
