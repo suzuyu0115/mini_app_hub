@@ -3,6 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             アプリ詳細画面
         </h2>
+        <x-message :message="session('message')" />
     </x-slot>
 
     <section class="text-gray-600 body-font">
@@ -48,11 +49,14 @@
                     <a href="{{ $product->code_url }}" class="text-gray-900 text-lg title-font font-medium">{{ $product->code_url }}</a>
                 </div>
             </div>
-            <div class="flex flex-col mb-5 lg:items-start items-center">
-                <a href="{{route('product.edit', $product)}}">
-                    <x-primary-button class="bg-teal-700 mr-5">編集</x-primary-button>
-                </a>
-            </div>
+                <div class="flex justify-end mt-4 mb-5 lg:items-start items-center justify-end mt-4">
+                    <a href="{{route('product.edit', $product)}}"><x-primary-button class="bg-teal-700 float-right">編集</x-primary-button></a>
+                    <form method="post" action="{{route('product.destroy', $product)}}">
+                    @csrf
+                    @method('delete')
+                        <x-primary-button class="bg-red-700 float-right ml-4" onClick="return confirm('本当に削除しますか？');">削除</x-primary-button>
+                    </form>
+                </div>
         </div>
     </div>
     </section>

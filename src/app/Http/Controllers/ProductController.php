@@ -121,7 +121,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('product.show', $product)->with('message', '投稿を更新しました');
+        return redirect()->route('product.show', $product)->with('message', 'アプリを更新しました');
     }
 
     /**
@@ -129,6 +129,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('product.index')->with('message', 'アプリを削除しました');
     }
 }
