@@ -9,8 +9,9 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mx-4 sm:p-8">
-                <form method="post" action="{{ route('product.store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('product.update', $product) }}" enctype="multipart/form-data">
                     @csrf
+                    @method('patch')
 
                     <div class="md:flex items-center mt-8">
                         <div class="w-full flex flex-col">

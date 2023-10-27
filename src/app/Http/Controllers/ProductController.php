@@ -43,7 +43,7 @@ class ProductController extends Controller
             'url' => 'required|max:1000',
             'code_url' => 'max:1000',
             'content' => 'required|max:1000',
-            'image' => 'image | max:2048'
+            'image' => 'image'
         ]);
 
         $product = new Product();
@@ -92,7 +92,36 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $inputs=$request->validate([
+            'name' => 'required|max:255',
+            'url' => 'required|max:1000',
+            'code_url' => 'max:1000',
+            'content' => 'required|max:1000',
+            'image' => 'image'
+        ]);
+
+        $product->name=$inputs['name'];
+        $product->url=$inputs['url'];
+        $product->code_url=$inputs['code_url'];
+        $product->content=$inputs['content'];
+
+        if ($request->has('image')) {
+            if (app()->isLocal()) {
+                // ローカル環境での処理
+                $original = $request->file('image')->getClientOriginalName();
+                $name = date('Ymd_His').'_'.$original;
+                $request->file('image')->move(public_path('storage/images'), $name);
+                $product->image = $name;
+            } else {
+                // 本番環境での処理
+                $path = Storage::disk('s3')->putFile('/', $request->file('image'), 'public');
+                $product->image = Storage::disk('s3')->url($path);
+            }
+        }
+
+        $product->save();
+
+        return redirect()->route('product.show', $product)->with('message', '投稿を更新しました');
     }
 
     /**
