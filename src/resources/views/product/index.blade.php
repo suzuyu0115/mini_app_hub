@@ -1,5 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
+        <x-message :message="session('message')" />
+        <br>
         <form action="{{ route('product.index') }}" method="GET">
             @csrf
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
@@ -8,7 +10,6 @@
                 <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2" value="検索">検索</button>
             </div>
         </form>
-        <x-message :message="session('message')" />
     </x-slot>
 
     <section class="text-gray-600 body-font">
@@ -47,11 +48,7 @@
                             <path d="M12 5l7 7-7 7"></path>
                             </svg>
                         </a>
-                        <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1">
-                            <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                            </svg>{{ $product->user->name }}
+                        <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1">by: {{ $product->user->name }}
                         </span>
                         </div>
                     </div>

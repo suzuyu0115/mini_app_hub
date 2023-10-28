@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function __construct()
     {
         // index アクションのみ認証を必要としないように設定
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index', 'show');
     }
     /**
      * Display a listing of the resource.
@@ -91,6 +91,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        if (Auth::id() !== $product->user_id) {
+            return redirect()->back()->with('message', '編集権限がありません');
+        }
         return view('product.edit', compact('product'));
     }
 
