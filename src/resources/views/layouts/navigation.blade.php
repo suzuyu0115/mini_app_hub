@@ -1,14 +1,14 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-25">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('product.index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
+            <div class="shrink-0 flex items-center">
+                <a href="{{ route('product.index') }}">
+                    <x-application-logo class="block h-6 w-auto fill-current text-gray-800" />
+                </a>
+            </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -84,10 +84,19 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-            <x-nav-link :href="route('product.create')" :active="request()->routeIs('post.create')">
-                新規作成
-            </x-nav-link>
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="mt-3 space-y-1">
+                    <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
+                        アプリ一覧
+                    </x-nav-link>
+            </div>
+            <div class="mt-3 space-y-1">
+                @if(Auth::check())
+                    <x-responsive-nav-link :href="route('product.create')" :active="request()->routeIs('product.create')">
+                        新規作成
+                    </x-nav-link>
+                @endif
+            </div>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -95,7 +104,6 @@
             @if(Auth::check())
                 <div class="px-4">
                     <div class="font-medium text-base text-gray-800">@if(Auth::check()) {{ Auth::user()->name }} @endif</div>
-                    <div class="font-medium text-sm text-gray-500">@if(Auth::check()) {{ Auth::user()->name }} @endif</div>
                 </div>
 
                 <div class="mt-3 space-y-1">
