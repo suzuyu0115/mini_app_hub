@@ -21,8 +21,23 @@
                 @endif
             </div>
             <br>
+            <div class="p-2">
+                <div class="inline-flex bg-indigo-100 text-indigo-500 mb-3 py-1 px-3 rounded">
+                    使用技術
+                </div>
+                <br>
+                @foreach ($product->tags as $index => $tag)
+                    <div class="relative inline-block py-2">
+                        <label for="checkbox{{ $tag->id }}" class="text-s">{{ $tag->name }}</label>
+
+                        @if ($index < count($product->tags) - 1) {{-- 最後のタグの前まで '/' を表示 --}}
+                            <span class="mx-1 text-s">/</span>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
         </div>
-        <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
+        <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left items-start">
             <div class="flex flex-col mb-5 lg:items-start items-center">
                 <div class="inline-flex bg-indigo-100 text-indigo-500 mb-3 py-1 px-3 rounded">
                     アプリ名

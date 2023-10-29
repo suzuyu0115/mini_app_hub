@@ -38,7 +38,6 @@
                     </div>
                 </div>
 
-                {{-- タグ選択 --}}
                 <div class="md:flex items-center mt-8">
                     <div class="w-full flex flex-col">
                         <label for="career" class="font-semibold leading-none mt-4">タグ</label>
@@ -47,8 +46,12 @@
                             <div class="p-2">
                                 @foreach ($tags as $tag)
                                     <div class="relative inline-block px-1 py-2">
-                                        <input checked="checked" type="checkbox" id="checkbox{{ $tag->id }}" name="tag[{{ $tag->id }}]" value="{{ $tag->id }}" class="opacity-0 absolute w-full h-full left-0 peer cursor-pointer">
-                                        <label for="checkbox{{ $tag->id }}" class="text-white rounded-full bg-teal-500 cursor-pointer ease-in peer-hover:bg-teal-500 px-2 py-1 peer-checked:bg-teal-700">{{ $tag->name }}</label>
+                                        <input type="checkbox"
+                                                id="checkbox{{ $tag->id }}"
+                                                name="tag[{{ $tag->id }}]"
+                                                value="{{ $tag->id }}"
+                                                class="opacity-0 absolute w-full h-full left-0 peer cursor-pointer">
+                                        <label for="checkbox{{ $tag->id }}" class="text-white rounded-full bg-teal-700 cursor-pointer ease-in peer-hover:bg-teal-500 px-2 py-1 peer-checked:bg-teal-500">{{ $tag->name }}</label>
                                     </div>
                                 @endforeach
                             </div>
