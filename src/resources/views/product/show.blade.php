@@ -53,7 +53,7 @@
                     URL
                 </div>
                 <div class="flex-grow">
-                    <a href="{{ $product->url }}" class="text-gray-900 text-lg title-font font-medium">{{ $product->url }}</a>
+                    <a href="{{ $product->url }}" class="text-gray-900 text-lg title-font font-medium" target="_blank">{{ $product->url }}</a>
                 </div>
             </div>
             <div class="flex flex-col mb-5 lg:items-start items-center">
@@ -61,7 +61,7 @@
                     コードURL
                 </div>
                 <div class="flex-grow">
-                    <a href="{{ $product->code_url }}" class="text-gray-900 text-lg title-font font-medium">{{ $product->code_url }}</a>
+                    <a href="{{ $product->code_url }}" class="text-gray-900 text-lg title-font font-medium" target="_blank">{{ $product->code_url }}</a>
                 </div>
             </div>
             @auth
