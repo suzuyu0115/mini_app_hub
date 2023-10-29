@@ -28,6 +28,13 @@ class ProductController extends Controller
             $query->where('name', 'like', '%' . $request->keyword . '%');
         }
 
+        // タグの絞り込み
+        if ($request->tag_id) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('id', $request->tag_id);
+            });
+        }
+
         $products = $query->get();
 
         return view('product.index', compact('products'));

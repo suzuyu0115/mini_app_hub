@@ -46,7 +46,7 @@
                         <div class="p-2">
                             @foreach ($product->tags as $index => $tag)
                                 <div class="relative inline-block py-2">
-                                    <label for="checkbox{{ $tag->id }}" class="text-xs">{{ $tag->name }}</label>
+                                    <a href="{{ route('product.index', ['tag_id' => $tag->id]) }}" class="text-xs">{{ $tag->name }}</a>
 
                                     @if ($index < count($product->tags) - 1) {{-- 最後のタグの前まで '/' を表示 --}}
                                         <span class="mx-1 text-xs">/</span>
