@@ -38,6 +38,28 @@
                         </div>
                     </div>
 
+                    <div x-data="{ open: false }" class="md:flex items-center mt-8 relative">
+                        <div class="w-full flex flex-col">
+                            <label for="tags" class="font-semibold leading-none mt-4">タグ</label>
+
+                            <!-- Dropdown Trigger -->
+                            <button @click="open = !open" class="bg-gray-200 text-gray-600 px-4 py-2 rounded inline-block" type="button">
+                                タグを選択
+                            </button>
+
+                            <!-- Dropdown Content -->
+                            <div x-show="open" @click.away="open = false" class="absolute w-64 bottom-full mb-2 max-h-60 py-2 bg-white border rounded shadow-xl overflow-y-auto">
+                                @foreach($tags as $tag)
+                                    <div class="flex items-center px-4 py-2">
+                                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="{{ $tag->name }}" class="mr-2">
+                                        <label for="{{ $tag->name }}">{{ $tag->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <small class="mt-1">複数のタグを選択できます</small>
+                        </div>
+                    </div>
+
                     <div class="w-full flex flex-col">
                         <label for="image" class="font-semibold leading-none mt-4">OGP画像</label>
                         <div>
