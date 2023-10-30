@@ -79,18 +79,6 @@
                         </div>
                     </div>
 
-            <div class="image-container">
-                @if($product->image)
-                    @if (App::environment('local'))
-                        <img src="{{ asset('storage/images/' . $product->image) }}" alt="Description" class="product-image">
-                    @else
-                        <img src="{{ $product->image }}" alt="Description" class="product-image">
-                    @endif
-                @else
-                    <img src="https://dummyimage.com/720x400" alt="Description" class="product-image">
-                @endif
-            </div>
-
                     <x-primary-button class="mt-4">
                         編集する
                     </x-primary-button>
