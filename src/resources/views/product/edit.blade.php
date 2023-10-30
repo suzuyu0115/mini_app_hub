@@ -64,13 +64,32 @@
                     <br>
                     <div class="w-full flex flex-col">
                         @if($product->image)
-                            <img src="{{ asset('storage/images/'.$product->image)}}" class="mx-auto" style="height:300px;">
+                            @if (App::environment('local'))
+                                <img src="{{ asset('storage/images/' . $product->image) }}" class="mx-auto" style="height:300px;">
+                            @else
+                                <img src="{{ $product->image }}" class="mx-auto" style="height:300px;">
+                            @endif
+                        @else
+                            <img src="https://dummyimage.com/720x400" class="mx-auto" style="height:300px;">
                         @endif
+
                         <label for="image" class="font-semibold leading-none mt-4">OGP画像</label>
                         <div>
                             <input id="image" type="file" name="image">
                         </div>
                     </div>
+
+            <div class="image-container">
+                @if($product->image)
+                    @if (App::environment('local'))
+                        <img src="{{ asset('storage/images/' . $product->image) }}" alt="Description" class="product-image">
+                    @else
+                        <img src="{{ $product->image }}" alt="Description" class="product-image">
+                    @endif
+                @else
+                    <img src="https://dummyimage.com/720x400" alt="Description" class="product-image">
+                @endif
+            </div>
 
                     <x-primary-button class="mt-4">
                         編集する

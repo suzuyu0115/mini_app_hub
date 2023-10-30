@@ -6,12 +6,12 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta property="og:description" content="スナック感覚で楽しめる個人開発サービス投稿サイト" />
         <meta property="og:site_name" content="MiniAppHub" />
-        <meta property="og:url" content="http://ec2-35-78-211-144.ap-northeast-1.compute.amazonaws.com:8080/" />
-        <meta property="og:image" content="{{ asset('images/ogp-image.png') }}" />
+        <meta property="og:url" content="http://ec2-35-78-211-144.ap-northeast-1.compute.amazonaws.com:8080" />
+        <meta property="og:image" content="https://mini-app-hub.s3.ap-northeast-1.amazonaws.com/kHWuqFHyfQiSGTMeZuDGuUtpXlMLoaWjb0kiDtaE.png" />
 
         <!-- Twitter-specific tags -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="{{ asset('images/ogp-image.png') }}" />
+        <meta name="twitter:image" content="https://mini-app-hub.s3.ap-northeast-1.amazonaws.com/kHWuqFHyfQiSGTMeZuDGuUtpXlMLoaWjb0kiDtaE.png" />
         <meta name="twitter:description" content="スナック感覚で楽しめる個人開発サービス投稿サイト" />
 
         <title>{{ config('app.name', 'Laravel') }}</title>

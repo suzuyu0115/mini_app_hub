@@ -65,14 +65,16 @@
                 </div>
             </div>
             @auth
-                <div class="flex justify-end mt-4 mb-5 lg:items-start items-center justify-end mt-4">
-                    <a href="{{route('product.edit', $product)}}"><x-primary-button class="bg-teal-700 float-right">編集</x-primary-button></a>
-                    <form method="post" action="{{route('product.destroy', $product)}}">
-                    @csrf
-                    @method('delete')
-                        <x-primary-button class="bg-red-700 float-right ml-4" onClick="return confirm('本当に削除しますか？');">削除</x-primary-button>
-                    </form>
-                </div>
+                @if (auth()->user()->id === $product->user_id)
+                    <div class="flex justify-end mt-4 mb-5 lg:items-start items-center justify-end mt-4">
+                        <a href="{{route('product.edit', $product)}}"><x-primary-button class="bg-teal-700 float-right">編集</x-primary-button></a>
+                        <form method="post" action="{{route('product.destroy', $product)}}">
+                            @csrf
+                            @method('delete')
+                            <x-primary-button class="bg-red-700 float-right ml-4" onClick="return confirm('本当に削除しますか？');">削除</x-primary-button>
+                        </form>
+                    </div>
+                @endif
             @endauth
         </div>
     </div>
