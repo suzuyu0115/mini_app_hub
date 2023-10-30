@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -20,11 +21,18 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::orderBy('created_at', 'desc');
+        $query = Product::with('tags')->orderBy('created_at', 'desc');
 
         // 検索キーワードが存在する場合、クエリを追加
         if ($request->keyword) {
             $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+
+        // タグの絞り込み
+        if ($request->tag_id) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('id', $request->tag_id);
+            });
         }
 
         $products = $query->get();
@@ -37,7 +45,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $tags = Tag::all();
+        return view('product.create', compact('tags'));
     }
 
     /**
@@ -75,6 +84,12 @@ class ProductController extends Controller
         }
 
         $product->save();
+
+        $tags = $request->input('tag');
+        if (!empty($tags)) {
+            $product->tags()->attach(array_keys($tags));
+        }
+
         return redirect()->route('product.index')->with('message', 'アプリを投稿しました');
     }
 
@@ -83,6 +98,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $product->load('tags');
         return view('product.show', compact('product'));
     }
 
@@ -94,7 +110,8 @@ class ProductController extends Controller
         if (Auth::id() !== $product->user_id) {
             return redirect()->back()->with('message', '編集権限がありません');
         }
-        return view('product.edit', compact('product'));
+        $tags = Tag::all();
+        return view('product.edit', compact('product', 'tags'));
     }
 
     /**
@@ -130,6 +147,10 @@ class ProductController extends Controller
         }
 
         $product->save();
+
+        $tags = $request->input('tag', []);
+
+        $product->tags()->sync($tags);
 
         return redirect()->route('product.show', $product)->with('message', 'アプリを更新しました');
     }

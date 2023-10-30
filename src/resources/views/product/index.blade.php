@@ -16,7 +16,7 @@
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap -m-4">
             @foreach ($products as $product)
-                <div class="p-4 md:w-1/3">
+                <div class="p-4 w-full md:w-1/3">
                     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="image-container">
                             @if($product->image)
@@ -31,7 +31,7 @@
                                 @endif
                             @else
                                 <a href="{{ route('product.show', $product) }}">
-                                    <img src="https://dummyimage.com/720x400" alt="Description" class="product-image"
+                                    <img src="https://dummyimage.com/720x400" alt="Description" class="product-image">
                                 </a>
                             @endif
                         </div>
@@ -41,8 +41,22 @@
                             <a href="{{ route('product.show', $product) }}">{{ $product->name }}</a>
                         </h1>
                         <p class="leading-relaxed mb-3">{{ $product->content }}</p>
+
+
+                        <div class="p-2">
+                            @foreach ($product->tags as $index => $tag)
+                                <div class="relative inline-block py-2">
+                                    <a href="{{ route('product.index', ['tag_id' => $tag->id]) }}" class="text-xs">{{ $tag->name }}</a>
+
+                                    @if ($index < count($product->tags) - 1) {{-- 最後のタグの前まで '/' を表示 --}}
+                                        <span class="mx-1 text-xs">/</span>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+
                         <div class="flex items-center flex-wrap ">
-                        <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0" href="{{ $product->url }}">アプリを見にいく
+                        <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0" href="{{ $product->url }}" target="_blank">アプリを見にいく
                             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14"></path>
                             <path d="M12 5l7 7-7 7"></path>
