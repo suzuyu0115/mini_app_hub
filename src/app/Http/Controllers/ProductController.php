@@ -163,4 +163,26 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('product.index')->with('message', 'アプリを削除しました');
     }
+
+    public function myProducts(Request $request)
+    {
+        $user = Auth::user();
+        $query = $user->products()->with('tags')->orderBy('created_at', 'desc');
+
+        // 検索キーワードが存在する場合、クエリを追加
+        if ($request->keyword) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+
+        // タグによる絞り込み
+        if ($request->tag_id) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('id', $request->tag_id);
+            });
+        }
+
+        $myProducts = $query->paginate(10);
+
+        return view('product.myProduct', compact('myProducts'));
+    }
 }

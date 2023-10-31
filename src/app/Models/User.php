@@ -18,8 +18,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-    public function posts() {
-        return $this->hasMany(Post::class);
+    public function products() {
+        return $this->hasMany(Product::class);
     }
 
     public function stockedProducts() {
