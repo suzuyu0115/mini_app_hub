@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('product', ProductController::class);
+Route::post('/products/{product}/toggle-stock', [StockController::class, 'toggleStock'])->name('products.toggle-stock');
 
 require __DIR__.'/auth.php';
