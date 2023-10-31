@@ -73,6 +73,8 @@
                 </div>
             @endforeach
         </div>
+        <br>
+        {{ $products->links() }}
     </div>
     </section>
 </x-app-layout>
