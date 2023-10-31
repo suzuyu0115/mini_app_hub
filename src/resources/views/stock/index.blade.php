@@ -15,40 +15,40 @@
     <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap -m-4">
-            @foreach ($products as $product)
+            @foreach ($stocks as $stock)
                 <div class="p-4 w-full md:w-1/3">
                     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="image-container">
-                            @if($product->image)
+                            @if($stock->image)
                                 @if (App::environment('local'))
-                                    <a href="{{ route('product.show', $product) }}">
-                                        <img src="{{ asset('storage/images/' . $product->image) }}" alt="Description" class="product-image">
+                                    <a href="{{ route('product.show', $stock) }}">
+                                        <img src="{{ asset('storage/images/' . $stock->image) }}" alt="Description" class="product-image">
                                     </a>
                                 @else
-                                    <a href="{{ route('product.show', $product) }}">
-                                        <img src="{{ $product->image }}" alt="Description" class="product-image">
+                                    <a href="{{ route('product.show', $stock) }}">
+                                        <img src="{{ $stock->image }}" alt="Description" class="product-image">
                                     </a>
                                 @endif
                             @else
-                                <a href="{{ route('product.show', $product) }}">
+                                <a href="{{ route('product.show', $stock) }}">
                                     <img src="https://dummyimage.com/720x400" alt="Description" class="product-image">
                                 </a>
                             @endif
                         </div>
                     <div class="p-6">
-                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $product->created_at->format('Y-m-d') }}</h2>
+                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $stock->created_at->format('Y-m-d') }}</h2>
                         <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-                            <a href="{{ route('product.show', $product) }}">{{ $product->name }}</a>
+                            <a href="{{ route('product.show', $stock) }}">{{ $stock->name }}</a>
                         </h1>
-                        <p class="leading-relaxed mb-3">{{ $product->content }}</p>
+                        <p class="leading-relaxed mb-3">{{ $stock->content }}</p>
 
 
                         <div class="p-2">
-                            @foreach ($product->tags as $index => $tag)
+                            @foreach ($stock->tags as $index => $tag)
                                 <div class="relative inline-block py-2">
                                     <a href="{{ route('product.index', ['tag_id' => $tag->id]) }}" class="text-xs">{{ $tag->name }}</a>
 
-                                    @if ($index < count($product->tags) - 1) {{-- 最後のタグの前まで '/' を表示 --}}
+                                    @if ($index < count($stock->tags) - 1) {{-- 最後のタグの前まで '/' を表示 --}}
                                         <span class="mx-1 text-xs">/</span>
                                     @endif
                                 </div>
@@ -56,16 +56,16 @@
                         </div>
 
                         <div class="flex items-center flex-wrap ">
-                            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0" href="{{ $product->url }}" target="_blank">アプリを見にいく
+                            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0" href="{{ $stock->url }}" target="_blank">アプリを見にいく
                                 <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5l7 7-7 7"></path>
                                 </svg>
                             </a>
-                            <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1">by: {{ $product->user->name }}
+                            <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1">by: {{ $stock->user->name }}
                             </span>
-                            <button class="toggle-stock mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1" data-id="{{ $product->id }}">
-                                <i class="{{ $product->isStockedBy(Auth::user()) ? 'fa-solid' : 'fa-regular' }} fa-folder fa-lg"></i>
+                            <button class="toggle-stock mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1" data-id="{{ $stock->id }}">
+                                <i class="{{ $stock->isStockedBy(Auth::user()) ? 'fa-solid' : 'fa-regular' }} fa-folder fa-lg"></i>
                             </button>
                         </div>
                     </div>

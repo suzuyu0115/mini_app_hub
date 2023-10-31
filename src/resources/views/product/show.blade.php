@@ -38,6 +38,11 @@
             </div>
         </div>
         <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left items-start">
+            @auth
+                <button class="toggle-stock mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1" data-id="{{ $product->id }}">
+                    <i class="{{ $product->isStockedBy(Auth::user()) ? 'fa-solid' : 'fa-regular' }} fa-folder fa-2x"></i>
+                </button>
+            @endauth
             <div class="flex flex-col mb-5 lg:items-start items-center">
                 <div class="inline-flex bg-indigo-100 text-indigo-500 mb-3 py-1 px-3 rounded">
                     アプリ名

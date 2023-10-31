@@ -25,4 +25,13 @@ class Product extends Model
     public function tags() {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function stockedByUsers() {
+        return $this->belongsToMany(User::class, 'stocks');
+    }
+
+    //ストックされているかを判定するメソッド。
+    public function isStockedBy($user): bool {
+        return Stock::where('user_id', $user->id)->where('product_id', $this->id)->first() !== null;
+    }
 }

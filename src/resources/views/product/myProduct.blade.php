@@ -15,7 +15,7 @@
     <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap -m-4">
-            @foreach ($products as $product)
+            @foreach ($myProducts as $product)
                 <div class="p-4 w-full md:w-1/3">
                     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="image-container">

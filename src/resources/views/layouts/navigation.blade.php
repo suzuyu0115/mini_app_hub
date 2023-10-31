@@ -19,6 +19,12 @@
                         <x-nav-link :href="route('product.create')" :active="request()->routeIs('post.create')">
                             新規作成
                         </x-nav-link>
+                        <x-nav-link :href="route('product.myProduct')" :active="request()->routeIs('product.myProduct')">
+                            Myアプリ
+                        </x-nav-link>
+                        <x-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.index')">
+                            Myストック
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
