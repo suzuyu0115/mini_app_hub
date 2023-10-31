@@ -21,6 +21,10 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany(Post::class);
     }
+
+    public function stocks() {
+        return $this->hasMany(Stock::class);
+    }
     protected $fillable = [
         'name',
         'email',
