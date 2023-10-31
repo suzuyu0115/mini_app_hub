@@ -22,9 +22,10 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function stocks() {
-        return $this->hasMany(Stock::class);
+    public function stockedProducts() {
+        return $this->belongsToMany(Product::class, 'stocks');
     }
+
     protected $fillable = [
         'name',
         'email',

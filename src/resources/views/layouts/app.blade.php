@@ -14,6 +14,9 @@
         <meta name="twitter:image" content="https://mini-app-hub.s3.ap-northeast-1.amazonaws.com/kHWuqFHyfQiSGTMeZuDGuUtpXlMLoaWjb0kiDtaE.png" />
         <meta name="twitter:description" content="スナック感覚で楽しめる個人開発サービス投稿サイト" />
 
+        <script src="https://kit.fontawesome.com/cc2521ebce.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
