@@ -7,6 +7,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\Paginator;
 
 
 class ProductController extends Controller
@@ -35,7 +36,7 @@ class ProductController extends Controller
             });
         }
 
-        $products = $query->get();
+        $products = $query->paginate(15);
 
         return view('product.index', compact('products'));
     }
@@ -181,7 +182,7 @@ class ProductController extends Controller
             });
         }
 
-        $myProducts = $query->paginate(10);
+        $myProducts = $query->paginate(15);
 
         return view('product.myProduct', compact('myProducts'));
     }

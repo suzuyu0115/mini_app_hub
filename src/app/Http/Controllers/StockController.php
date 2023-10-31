@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 
 class StockController extends Controller
 {
@@ -42,7 +43,7 @@ class StockController extends Controller
             });
         }
 
-        $stocks = $query->get();
+        $stocks = $query->paginate(15);
 
         return view('stock.index', compact('stocks'));
     }
