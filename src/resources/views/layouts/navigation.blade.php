@@ -103,6 +103,16 @@
                     </x-nav-link>
                 @endif
             </div>
+            <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('product.myProduct')" :active="request()->routeIs('product.myProduct')">
+                    Myアプリ
+                </x-nav-link>
+            </div>
+            <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.index')">
+                    Myストック
+                </x-nav-link>
+            </div>
         </div>
 
         <!-- Responsive Settings Options -->
