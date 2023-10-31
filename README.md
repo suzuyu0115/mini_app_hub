@@ -30,19 +30,22 @@
 - GitHubのリンクや使用技術のタグをつけることで技術的知見も得られるような導線も貼る
 
 ## ■使用技術(予定)
- - バックエンド
- PHP(8.1), Laravel(10.8)
- - フロントエンド
- Tailwind css、JavaScript、blade
- - 開発環境
-  Docker
- - DB
- MySQL(8.0)
- - Webサーバ
- Nginx
- - インフラ
- EC2
- S3
+### バックエンド
+ - PHP(8.1)
+ - Laravel(10.8)
+### フロントエンド
+ - Tailwind css
+ - JavaScript
+ - blade
+### 開発環境
+ - Docker
+### DB
+ - MySQL(8.0)
+### Webサーバ
+ - Nginx
+### インフラ
+ - EC2
+ - S3
 
 ## ■実装機能
  - ユーザー登録機能
