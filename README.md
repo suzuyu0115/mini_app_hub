@@ -4,6 +4,9 @@
 ## ■概要
 <img width="707" alt="ogp-image" src="https://github.com/suzuyu0115/mini_app_hub/assets/113349377/6502486c-a8e0-48f2-a73c-88678d791fe1">
 
+##　■概要
+アプリURL：　http://ec2-35-78-211-144.ap-northeast-1.compute.amazonaws.com:8080/
+
 技術の練習や気軽な気持ちで作った
 スナック感覚で楽しめるミニアプリを集約する
 開発サービス共有アプリです。
