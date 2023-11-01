@@ -1,5 +1,5 @@
 ## ■サービス概要
-### Mini_app_hub
+### MiniApphub
 
 ## ■概要
 <img width="707" alt="ogp-image" src="https://github.com/suzuyu0115/mini_app_hub/assets/113349377/6502486c-a8e0-48f2-a73c-88678d791fe1">
