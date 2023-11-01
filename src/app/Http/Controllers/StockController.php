@@ -12,7 +12,7 @@ class StockController extends Controller
     public function toggleStock(Request $request, Product $product)
     {
         $user = Auth::user();
-
+        // ユーザーが既にこのプロダクトをストックしているかチェック
         if ($user->stockedProducts()->where('product_id', $product->id)->exists()) {
             $user->stockedProducts()->detach($product->id);
             $status = 'removed';
@@ -28,10 +28,10 @@ class StockController extends Controller
     {
         $user = Auth::user();
 
-        // ユーザーがストックした製品のクエリを構築
+        // ユーザーがストックしたプロダクトのクエリを構築
         $query = $user->stockedProducts()->with('tags')->orderBy('created_at', 'desc');
 
-        // 検索キーワードが存在する場合、製品名でフィルタリング
+        // 検索キーワードが存在する場合、プロダクト名でフィルタリング
         if ($request->keyword) {
             $query->where('name', 'like', '%' . $request->keyword . '%');
         }
