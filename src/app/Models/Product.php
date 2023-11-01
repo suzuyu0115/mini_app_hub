@@ -30,8 +30,11 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'stocks');
     }
 
-    //ストックされているかを判定するメソッド。
+    // ストックされているかを判定するメソッド。
     public function isStockedBy($user): bool {
+        if (is_null($user)) {
+            return false;
+        }
         return Stock::where('user_id', $user->id)->where('product_id', $this->id)->first() !== null;
     }
 }
