@@ -64,9 +64,11 @@
                             </a>
                             <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1">by: {{ $product->user->name }}
                             </span>
-                            <button class="toggle-stock mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1" data-id="{{ $product->id }}">
-                                <i class="{{ $product->isStockedBy(Auth::user()) ? 'fa-solid' : 'fa-regular' }} fa-folder fa-lg"></i>
-                            </button>
+                            @auth
+                                <button class="toggle-stock mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1" data-id="{{ $product->id }}">
+                                    <i class="{{ $product->isStockedBy(Auth::user()) ? 'fa-solid' : 'fa-regular' }} fa-folder fa-lg"></i>
+                                </button>
+                            @endauth
                         </div>
                     </div>
                     </div>
